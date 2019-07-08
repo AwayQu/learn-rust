@@ -19,6 +19,7 @@ fn main() {
         io::stdin().read_line(&mut guess) // & indicate is a reference
             .expect("Failed to read line");
         // expect will cause the program to crash and display the message that you passed as an argument to expect
+       
         /**
          * If the read_line method returns an Err, 
          * it would likely be the result of an error coming from the underlying operating system. 
@@ -26,11 +27,13 @@ fn main() {
          *  expect will take the return value that Ok is holding and return just that value to you so you can use it.
          *  In this case, that value is the number of bytes in what the user entered into standard input.
          */
-        let guess: u32 = guess.trim().parse()
-            .expect("Please type a number!");
-
-
-        
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Invalid input!");
+                continue
+            },
+        };
 
 
         //  Result Type, the variants are Ok or Err.
