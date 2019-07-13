@@ -30,6 +30,28 @@ fn main() {
     // let r1 = &s; // no problem
     // let r2 = &s; // no problem
     // let r3 = &mut s; // BIG PROBLEM
+    // println!("{}, {}, and {}", r1, r2, r3);
+    
+    let r1 = &s; // no problem
+    let r2 = &s; // no problem
+    println!("{}, {}", r1, r2);
+    let r3 = &mut s; // BIG PROBLEM
+    
+    // let reference_dangling = dangle();
+    let no_dangle_variable = no_dangle();
+}
+
+///  悬垂指针
+// fn dangle() -> &String {
+//     let s = String::from("hello"); /// will dealloc after return
+
+//     &s
+// }
+
+fn no_dangle() -> String { /// move owner
+    let s = String::from("hello");
+
+    s
 }
 
 fn change(some_string: &mut String) {
